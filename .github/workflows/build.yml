@@ -22,31 +22,31 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - arch: arm64
-            tool: aarch64-unknown-linux-musl
-          - arch: arm
-            tool: armv6-unknown-linux-musleabi
-          - arch: mips64
-            tool: mips64-unknown-linux-musl
-          - arch: mipselsf
-            tool: mipsel-unknown-linux-muslsf
-          - arch: mipssf
-            tool: mips-unknown-linux-muslsf
-          - arch: ppc
-            tool: powerpc-unknown-linux-musl
-          - arch: x86
-            tool: i586-unknown-linux-musl
+          # - arch: arm64
+          #   tool: aarch64-unknown-linux-musl
+          # - arch: arm
+          #   tool: armv6-unknown-linux-musleabi
+          # - arch: mips64
+          #   tool: mips64-unknown-linux-musl
+          # - arch: mipselsf
+          #   tool: mipsel-unknown-linux-muslsf
+          # - arch: mipssf
+          #   tool: mips-unknown-linux-muslsf
+          # - arch: ppc
+          #   tool: powerpc-unknown-linux-musl
+          # - arch: x86
+          #   tool: i586-unknown-linux-musl
           - arch: x86_64
             tool: x86_64-unknown-linux-musl
-          - arch: riscv64
-            tool: riscv64-unknown-linux-musl
-          - arch: lexra
-            tool: mips-linux
-            dir: rsdk-4.6.4-5281-EB-3.10-0.9.33-m32ub-20141001
-            env:
-              CFLAGS: '-march=5281'
-              LDFLAGS: '-lgcc_eh'
-            repo: 'bol-van/build'
+          # - arch: riscv64
+          #   tool: riscv64-unknown-linux-musl
+          # - arch: lexra
+          #   tool: mips-linux
+          #   dir: rsdk-4.6.4-5281-EB-3.10-0.9.33-m32ub-20141001
+          #   env:
+          #     CFLAGS: '-march=5281'
+          #     LDFLAGS: '-lgcc_eh'
+          #   repo: 'bol-van/build'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -195,6 +195,7 @@ jobs:
 
 
   build-android:
+    if: ${{ false }}
     name: Android ${{ matrix.abi }}
     runs-on: ubuntu-latest
     strategy:
@@ -310,6 +311,7 @@ jobs:
 
 
   build-freebsd:
+    if: ${{ false }}
     name: FreeBSD ${{ matrix.arch }}
     runs-on: ubuntu-latest
     env:
