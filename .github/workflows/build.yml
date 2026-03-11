@@ -419,8 +419,8 @@ jobs:
         uses: cygwin/cygwin-install-action@v4
         with:
           platform: ${{ matrix.arch }}
-          site: ${{ matrix.arch == 'x86_64' && 'http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2024/01/30/231215' || 'http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/2022/11/23/063457' }}
-          check-sig: 'false'
+          #site: ${{ matrix.arch == 'x86_64' && 'http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/64bit/2024/01/30/231215' || 'http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin/circa/2022/11/23/063457' }}
+          #check-sig: 'false'
           packages: >-
             gcc-core
             make
