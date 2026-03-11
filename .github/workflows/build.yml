@@ -518,6 +518,7 @@ jobs:
           pattern: zapret2-*
 
       - name: Install upx
+        if: ${{ false }}
         shell: bash
         env:
           VER_OLD: 4.2.4
@@ -532,6 +533,7 @@ jobs:
           rm -r upx-$VER_OLD-amd64_linux/upx upx-$VER_NEW-amd64_linux/upx
 
       - name: Prepare binaries
+        if: ${{ false }}
         shell: bash
         run: |
           cd ${{ steps.bins.outputs.download-path }}
