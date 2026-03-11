@@ -6,8 +6,8 @@ on:
   push:
     tags:
       - v[0-9]+*
-    # branches:
-    #   - master
+    branches:
+      - random_tweaks
     # paths:
     #   - 'ip2net/**'
     #   - 'mdig/**'
