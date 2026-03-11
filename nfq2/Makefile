@@ -157,9 +157,9 @@ bsd: $(SRC_FILES)
 	$(CC) $(STRIPP) $(CFLAGS) $(LUA_CFL) $(CFLAGS_BSD) -o dvtws2 $(SRC_FILES) $(LIBS) $(LUA_LIB) $(LIBS_BSD) $(LDFLAGS)
 
 $(RES_CYGWIN64):
-    cd nfq2/windows/res && windres winws.rc -O coff -o $(RES_CYGWIN64)
+	cd windows/res && windres winws.rc -O coff -o winws_res64.o
 $(RES_CYGWIN32):
-    cd nfq2/windows/res && windres winws.rc -O coff -o $(RES_CYGWIN32)
+	cd windows/res && windres winws.rc -O coff -o winws_res32.o
 cygwin64: $(RES_CYGWIN64)
 	$(CC) $(STRIPP) $(CFLAGS) $(LUA_CFL) $(CFLAGS_CYGWIN) $(CFLAGS_CYGWIN64) -o winws2 $(SRC_FILES) $(RES_CYGWIN64) $(LIBS) $(LUA_LIB) $(LIBS_CYGWIN) $(LIBS_CYGWIN64) $(LDFLAGS)
 cygwin32: $(RES_CYGWIN32)
