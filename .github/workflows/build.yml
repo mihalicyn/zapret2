@@ -477,7 +477,7 @@ jobs:
           BITS: ${{ matrix.arch == 'x86_64' && '64' || '32' }}
           DIR: ${{ matrix.arch == 'x86_64' && 'x64' || 'x86' }}
         shell: C:\cygwin\bin\bash.exe -eo pipefail '{0}'
-        run: unzip -j ${{ env.WINDIVERT_NAME }} "*/${DIR}/WinDivert.dll" "*/${DIR}/WinDivert${BITS}.sys" -d output
+        run: unzip -j ${{ env.WINDIVERT_NAME }} "*/${DIR}/WinDivert.dll" "*/${DIR}/WinDivert.lib" "*/${DIR}/WinDivert${BITS}.sys" -d output
 
       - name: Copy WinDivert library
         env:
