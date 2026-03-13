@@ -484,7 +484,7 @@ jobs:
           BITS: ${{ matrix.arch == 'x86_64' && '64' || '32' }}
         shell: C:\cygwin\bin\bash.exe -eo pipefail '{0}'
         run: >-
-          cp output/WinDivert.lib nfq2/windows/windivert/libwindivert${BITS}.a
+          cp output/WinDivert.lib zapret2/nfq2/windows/windivert/libwindivert${BITS}.a
 
       - name: Build luajit
         env:
