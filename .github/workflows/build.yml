@@ -482,11 +482,9 @@ jobs:
       - name: Copy WinDivert library
         env:
           BITS: ${{ matrix.arch == 'x86_64' && '64' || '32' }}
-          DIR: ${{ matrix.arch == 'x86_64' && 'x64' || 'x86' }}
         shell: C:\cygwin\bin\bash.exe -eo pipefail '{0}'
         run: >-
-          ( [ "$BITS" = 32 ] && cp output/x86/WinDivert.lib nfq2/windows/windivert/libwindivert32.a || true ) &&
-          ( [ "$BITS" = 64 ] && cp output/x64/WinDivert.lib nfq2/windows/windivert/libwindivert64.a || true )
+          cp output/WinDivert.lib nfq2/windows/windivert/libwindivert${BITS}.a
 
       - name: Build luajit
         env:
