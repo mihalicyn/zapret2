@@ -17,7 +17,7 @@ env:
   WINDIVERT_URL: https://github.com/basil00/WinDivert/releases/download/v2.2.2/WinDivert-2.2.2-A.zip
   WINDIVERT_NAME: WinDivert-2.2.2-A.zip
   WINDIVERT_BASENAME: WinDivert-2.2.2-A
-  WINDIVERT_SHA256: 63cb41763bb4b20f600b6de04e991a9c2be73279e317d4d82f237b150c5f3f14
+  WINDIVERT_SHA256: 63cb41763bb4b20f600b6de04e991a9c2be73279e317d4d82f237b150c5f3f15
 
 jobs:
 
@@ -473,8 +473,17 @@ jobs:
           (echo ${{ env.WINDIVERT_SHA256 }} ${{ env.WINDIVERT_NAME }} | sha256sum -c)
 
       - name: Unpack WinDivert
+        env:
+          BITS: ${{ matrix.arch == 'x86_64' && '64' || '32' }}
+          DIR: ${{ matrix.arch == 'x86_64' && 'x64' || 'x86' }}
         shell: C:\cygwin\bin\bash.exe -eo pipefail '{0}'
-        run: unzip ${{ env.WINDIVERT_NAME }}
+        run: unzip -j ${{ env.WINDIVERT_NAME }} "*/${DIR}/WinDivert.dll" "*/${DIR}/WinDivert${BITS}.sys" -d output
+
+      - name: Copy WinDivert library
+        shell: C:\cygwin\bin\bash.exe -eo pipefail '{0}'
+        run: >-
+          ( [ "$BITS" = 32 ] && cp output/x86/WinDivert.lib nfq2/windows/windivert/libwindivert32.a || true ) &&
+          ( [ "$BITS" = 64 ] && cp output/x64/WinDivert.lib nfq2/windows/windivert/libwindivert64.a || true )
 
       - name: Build luajit
         env:
@@ -508,10 +517,6 @@ jobs:
         shell: C:\cygwin\bin\bash.exe -e '{0}'
         run: >-
           cp -a -t output psmisc/psmisc-*.src/psmisc-*/inst/usr/bin/killall.exe /usr/bin/cygwin1.dll &&
-          wget -O WinDivert.zip "${WINDIVERT_URL}" &&
-          unzip -j WinDivert.zip "*/${DIR}/WinDivert.dll" "*/${DIR}/WinDivert${BITS}.sys" -d output &&
-          ( [ "$BITS" = 64 ] && rebase -b 0x205c00000 output/WinDivert.dll || true ) &&
-          peflags --dynamicbase=true --high-entropy-va=true output/WinDivert.dll &&
           zip zapret2-win-${{ matrix.arch }}.zip -j output/*
 
       - name: Upload artifacts
