@@ -22,15 +22,14 @@ env:
 jobs:
 
   build-linux:
-    if: ${{ false }}
     name: Linux ${{ matrix.arch }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          # - arch: arm64
-          #   tool: aarch64-unknown-linux-musl
+          - arch: arm64
+            tool: aarch64-unknown-linux-musl
           # - arch: arm
           #   tool: armv6-unknown-linux-musleabi
           # - arch: mips64
